@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.2/dist/html2pdf.bundle.min.js"></script>
+    <style>
+        /* Apply Poppins to the entire page except for h1 */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 50; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center bg-white">
+    <div class="text-center" id="contentToPDF">
+        <h1 class="font-bold mt-8" style='font-family: "Bebas Neue", sans-serif;font-weight: 400;font-style: normal;font-size:45px;'>WORLD UNIVERSITY OF BANGLADESH</h1>
+        <img src="1.png" alt="WUB Logo" class="mx-auto my-2 w-52 ">
+        <h2 id="courseTitle" class="text-2xl font-bold bg-gray-600 text-white p-2 uppercase">INTRODUCTION TO INTERNET LAB</h2>
+        <p id="courseCode" class="text-2xl py-2 font-semibold">Course Code: CSE 06111212</p>
+        <p id="assignmentInfo" class="text-2xl font-semibold mt-2">Assignment - 01</p>
+        <div id="submittedTo" class="mt-7">
+            <p class="font-bold text-3xl py-2">Submitted To<hr></p>
+            <p class="font-semibold text-xl pt-2">Mahbuba Yesmin Turaba</p>
+            <p class="text-xl ">Lecturer</p>
+            <p class="text-xl ">Department of CSE</p>
+            <p class="text-xl ">World University of Bangladesh</p>
+        </div>
+        <div id="submittedBy" class="mt-7">
+            <p class="font-bold text-3xl py-2">Submitted By<hr></p>
+            <p class="font-semibold text-xl pt-2">Jannatul Sadia</p>
+            <p class="text-xl ">Roll: 4619; Batch: 79/A</p>
+            <p class="text-xl ">Reg No: WUB 01/23/79/4619</p>
+            <p class="text-xl ">Department of Business Administration</p>
+        </div>
+        <div id="dateInfo" class="mt-6">
+            <p class="font-semibold text-2xl ">Date: 16/03/2024</p>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="text-2xl font-bold mb-4">Submit Your Details</h2>
+            <form id="infoForm" class="space-y-4">
+                <input type="text" id="sub_name" placeholder="Course Title" class="border border-gray-300 p-2 w-full rounded">
+                <input type="text" id="sub_code" placeholder="Course Code" class="border border-gray-300 p-2 w-full rounded">
+                <input type="text" id="assignment" placeholder="Assignment Info" class="border border-gray-300 p-2 w-full rounded">
+                <input type="text" id="teacher_name" placeholder="Teacher's Name" class="border border-gray-300 p-2 w-full rounded">
+                <input type="text" id="teacher_designation" placeholder="Teacher's Designation" class="border border-gray-300 p-2 w-full rounded">
+                <input type="text" id="teacher_department" placeholder="Teacher's Department" class="border border-gray-300 p-2 w-full rounded">
+                <input type="text" id="stu_name" placeholder="Student Name" class="border border-gray-300 p-2 w-full rounded">
+                <input type="text" id="stu_roll" placeholder="Student Roll" class="border border-gray-300 p-2 w-full rounded">
+                <input type="text" id="stu_batch" placeholder="Student Batch" class="border border-gray-300 p-2 w-full rounded">
+                <input type="text" id="stu_reg" placeholder="Student Reg No." class="border border-gray-300 p-2 w-full rounded">
+                <input type="text" id="stu_department" placeholder="Student Department" class="border border-gray-300 p-2 w-full rounded">
+                <input type="text" id="Date" placeholder="Date" class="border border-gray-300 p-2 w-full rounded">
+                <button type="submit" class="bg-blue-500 text-white p-2 rounded">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        window.onload = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        document.getElementById('infoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var sub_name = document.getElementById('sub_name').value;
+            var sub_code = document.getElementById('sub_code').value;
+            var assignment = document.getElementById('assignment').value;
+            var teacher_name = document.getElementById('teacher_name').value;
+            var teacher_designation = document.getElementById('teacher_designation').value;
+            var teacher_department = document.getElementById('teacher_department').value;
+            var stu_name = document.getElementById('stu_name').value;
+            var stu_roll = document.getElementById('stu_roll').value;
+            var stu_batch = document.getElementById('stu_batch').value;
+            var stu_reg = document.getElementById('stu_reg').value;
+            var stu_department = document.getElementById('stu_department').value;
+            var date = document.getElementById('Date').value;
+
+            // Update HTML content with form data
+            document.getElementById('courseTitle').textContent = sub_name;
+            document.getElementById('courseCode').textContent = `Course Code: ${sub_code}`;
+            document.getElementById('assignmentInfo').textContent = assignment;
+            document.getElementById('submittedTo').innerHTML = `
+                <p class="font-bold text-3xl py-2">Submitted To<hr></p>
+                <p class="font-semibold text-xl pt-2">${teacher_name}</p>
+                <p class="text-xl ">${teacher_designation}</p>
+                <p class="text-xl ">${teacher_department}</p>
+                <p class="text-xl ">World University of Bangladesh</p>
+            `;
+            document.getElementById('submittedBy').innerHTML = `
+                <p class="font-bold text-3xl py-2">Submitted By<hr></p>
+                <p class="font-semibold text-xl pt-2">${stu_name}</p>
+                <p class="text-xl ">Roll: ${stu_roll}; Batch: ${stu_batch}</p>
+                <p class="text-xl ">Reg No: ${stu_reg}</p>
+                <p class="text-xl ">Department of ${stu_department}</p>
+            `;
+            document.getElementById('dateInfo').innerHTML = `<p class="font-semibold text-2xl ">Date: ${date}</p>`;
+
+            // Convert HTML content to PDF and redirect
+            const element = document.getElementById('contentToPDF');
+            const opt = {
+                margin: 0.5,
+                filename: `CoverPage_${sub_name} (${date}).pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(element).set(opt).save().then(() => {
+                window.open('https://www.ilovepdf.com/pdf_to_jpg', '_blank');
+                document.getElementById('infoForm').reset();
+            });
+
+            modal.style.display = "none";
+        });
+    </script>
+</body>
+</html>
